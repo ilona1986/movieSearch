@@ -27,50 +27,56 @@ export const createElement = ({
     return el;
 };
 
-export const createStyle = () => {
-    const headStyle = document.createElement('style')
+// export const createStyle = () => {
+//     const headStyle = document.createElement('style')
 
-    headStyle.innerHTML = `
-* {box-sizing: border-box;}
-body {margin: 0; font-family: Arial, "Helvetica Neue", sans-serif;}
-.container {
-    padding: 20px; 
-    max-width: 1280px; 
-    margin: 0 auto;
-}
-.search {margin-bottom: 30px;}
-.search__label-input {
-    display: block;
-    margin-bottom: 7px;
-}
-.search__input {
-    display: block;
-    padding: 10px 15px;
-    width: 400px;
-    border: 1px solid lightgrey;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-.search__label-checkbox {
-    display: block;
-    font-size: 12px;
-    margin-top: -17px;
-    margin-left: 25px;
-}
-.movies {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-}
-.movie {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-}
-.movie__image {width: 100%; object-fit: cover;}`;
+//     headStyle.innerHTML = `
+// * {box-sizing: border-box;}
+// body {margin: 0; 
+//     font-family: Arial, "Helvetica Neue", sans-serif;
+    
+// }
+// .container {
+//     padding: 20px; 
+//     max-width: 1280px; 
+//     margin: 0 auto;
+// }
+// .search {margin-bottom: 30px;}
+// .search__label-input {
+//     display: block;
+//     margin-bottom: 7px;
+// }
+// .search__wrap {
+//     display: flex;
+//     align-items: center;
+//     gap: 10px;
+// }
+// .search__input {
+//     display: block;
+//     padding: 10px 15px;
+//     width: 400px;
+//     border: 1px solid lightgrey;
+//     border-radius: 4px;
+//     margin-bottom: 10px;
+// }
+// .search__label-checkbox {
+//     display: block;
+//     font-size: 12px;
+// }
+// .movies {
+//     display: grid;
+//     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+//     gap: 20px;
+// }
+// .movie {
+//     display: flex;
+//     align-content: center;
+//     justify-content: center;
+// }
+// .movie__image {width: 100%; object-fit: cover;}`;
 
-    document.head.append(headStyle);
-};
+//     document.head.append(headStyle);
+// };
 
 export const createMarkup = () => {
     const container = createElement({
@@ -113,6 +119,12 @@ export const createMarkup = () => {
         container: searchBox
     });
 
+    const searchWrap = createElement({
+        type: 'div',
+        attrs: { class: 'search__wrap' },
+        container: searchBox
+    });
+
     createElement({
         type: 'input',
         attrs: {
@@ -120,7 +132,7 @@ export const createMarkup = () => {
             id: 'checkbox',
             type: 'checkbox'
         },
-        container: searchBox,
+        container: searchWrap,
         evt: 'click',
         handler: () => triggerMode = !triggerMode
     });
@@ -132,7 +144,7 @@ export const createMarkup = () => {
             for: 'checkbox',
             innerText: 'Добавлять фильмы к существующему списку'
         },
-        container: searchBox
+        container: searchWrap
     });
 
     createElement({

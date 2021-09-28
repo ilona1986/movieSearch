@@ -2,7 +2,7 @@ import {
     addMovieList,
     clearMovieMarkup,
     createMarkup,
-    createStyle,
+    // createStyle,
     inputSearch,
     movieList,
     triggerMode
@@ -45,7 +45,7 @@ const inputSearchHandler = (e) => {
 
 export const appInit = (url) => {
     createMarkup();
-    createStyle();
+    // createStyle();
     siteUrl = url;
 
     inputSearch.addEventListener('keyup', inputSearchHandler);
