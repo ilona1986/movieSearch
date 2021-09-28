@@ -1,6 +1,14 @@
 * {box-sizing: border-box;}
 body {margin: 0; 
     font-family: Arial, "Helvetica Neue", sans-serif;
+    /* background-color: whitesmoke;
+    background-image: url(../img/fon.jpg);
+    top:0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+     */
 }
 .container {
     padding: 20px; 

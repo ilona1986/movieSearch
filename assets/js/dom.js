@@ -79,11 +79,18 @@ export const createElement = ({
 // };
 
 export const createMarkup = () => {
+    const content = createElement({
+        type: 'div',
+        attrs: { class: 'content' },
+        container: document.body,
+        position: 'prepend'
+    });
+
     const container = createElement({
         type: 'div',
         attrs: { class: 'container' },
-        container: document.body,
-        position: 'prepend'
+        container: content,
+        // position: 'prepend'
     });
 
     createElement({
