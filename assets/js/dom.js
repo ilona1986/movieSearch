@@ -90,7 +90,6 @@ export const createMarkup = () => {
         type: 'div',
         attrs: { class: 'container' },
         container: content,
-        // position: 'prepend'
     });
 
     createElement({
