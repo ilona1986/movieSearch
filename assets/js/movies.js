@@ -42,6 +42,7 @@ const inputSearchHandler = (e) => {
                 .catch((err) => console.log(err));
         }
         count++;
+
         searchLast = searchString;
     }, 2000);
 };
