@@ -42,7 +42,7 @@ export const createStyle = () => {
     background-position: 85% 20%; 
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: 2424px; 
+    height: calc(100vh + 224px); 
     opacity: 0.95;
   }
   .container {
