@@ -32,17 +32,14 @@ export const createStyle = () => {
 
   headStyle.innerHTML = `
     * {box-sizing: border-box;}
-  body {
-    margin: 0;
-    /* font-family: Arial, "Helvetica Neue", sans-serif; */
-  }
+  body {margin: 0;}
   .content {
     background-color: hsl(249, 9%, 44%);
     background-image: url(../assets/img/fon.jpg);
     background-position: 85% 20%; 
     background-size: cover;
     background-repeat: no-repeat;
-    height: calc(100vh + 224px); 
+    height: 2424px; 
     opacity: 0.95;
   }
   .container {
