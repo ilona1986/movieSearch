@@ -3,183 +3,201 @@ export let inputSearch = null;
 export let triggerMode = false;
 
 export const createElement = ({
-    type,
-    attrs,
-    container = null,
-    position = 'append',
-    evt = null,
-    handler = null
+  type,
+  attrs,
+  container = null,
+  position = 'append',
+  evt = null,
+  handler = null
 }) => {
-    const el = document.createElement(type);
+  const el = document.createElement(type);
 
-    Object.keys(attrs).forEach((key) => {
-        if (key !== 'innerText') {
-            el.setAttribute(key, attrs[key]);
-        } else {
-            el.innerHTML = attrs[key];
-        }
-    });
+  Object.keys(attrs).forEach((key) => {
+    if (key !== 'innerText') {
+      el.setAttribute(key, attrs[key]);
+    } else {
+      el.innerHTML = attrs[key];
+    }
+  });
 
-    if (container && position === 'append') container.append(el);
-    if (container && position === 'prepend') container.prepend(el);
-    if (evt && handler && typeof handler === 'function') el.addEventListener(evt, handler);
+  if (container && position === 'append') container.append(el);
+  if (container && position === 'prepend') container.prepend(el);
+  if (evt && handler && typeof handler === 'function') el.addEventListener(evt, handler);
 
-    return el;
+  return el;
 };
 
-// export const createStyle = () => {
-//     const headStyle = document.createElement('style')
+export const createStyle = () => {
+  const headStyle = document.createElement('style')
 
-//     headStyle.innerHTML = `
-// * {box-sizing: border-box;}
-// body {margin: 0; 
-//     font-family: Arial, "Helvetica Neue", sans-serif;
-    
-// }
-// .container {
-//     padding: 20px; 
-//     max-width: 1280px; 
-//     margin: 0 auto;
-// }
-// .search {margin-bottom: 30px;}
-// .search__label-input {
-//     display: block;
-//     margin-bottom: 7px;
-// }
-// .search__wrap {
-//     display: flex;
-//     align-items: center;
-//     gap: 10px;
-// }
-// .search__input {
-//     display: block;
-//     padding: 10px 15px;
-//     width: 400px;
-//     border: 1px solid lightgrey;
-//     border-radius: 4px;
-//     margin-bottom: 10px;
-// }
-// .search__label-checkbox {
-//     display: block;
-//     font-size: 12px;
-// }
-// .movies {
-//     display: grid;
-//     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-//     gap: 20px;
-// }
-// .movie {
-//     display: flex;
-//     align-content: center;
-//     justify-content: center;
-// }
-// .movie__image {width: 100%; object-fit: cover;}`;
+  headStyle.innerHTML = `
+    * {box-sizing: border-box;}
+  body {margin: 0;}
+  .content {
+    background-color: hsl(249, 9%, 44%);
+    background-image: url(../assets/img/fon.jpg);
+    background-position: 85% 20%; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 2424px; 
+    opacity: 0.95;
+  }
+  .container {
+    font-family: Arial, "Helvetica Neue", sans-serif;
+    padding: 20px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .container h1 {
+    text-align: center;
+    font-size: 2rem;
+    text-shadow: 0px 0px 20px blue, 0px 0px 20px blue, 0px 0px 20px blue;
+  }
+  .search {
+    margin-bottom: 30px;
+  }
+  .search__label-input {
+    display: block;
+    margin-bottom: 7px;
+  }
+  .search__wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .search__input {
+    display: block;
+    padding: 10px 15px;
+    width: 400px;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  .search__label-checkbox {
+    display: block;
+    font-size: 12px;
+  }
+  .movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .movie {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+  .movie__image {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+  }`;
 
-//     document.head.append(headStyle);
-// };
+  document.head.append(headStyle);
+};
 
 export const createMarkup = () => {
-    const content = createElement({
-        type: 'div',
-        attrs: { class: 'content' },
-        container: document.body,
-        position: 'prepend'
-    });
+  const content = createElement({
+    type: 'div',
+    attrs: { class: 'content' },
+    container: document.body,
+    position: 'prepend'
+  });
 
-    const container = createElement({
-        type: 'div',
-        attrs: { class: 'container' },
-        container: content,
-    });
+  const container = createElement({
+    type: 'div',
+    attrs: { class: 'container' },
+    container: content,
+  });
 
-    createElement({
-        type: 'h1',
-        attrs: { innerText: 'Приложение для поиска фильмов' },
-        container
-    });
+  createElement({
+    type: 'h1',
+    attrs: { innerText: 'Приложение для поиска фильмов' },
+    container
+  });
 
-    const searchBox = createElement({
-        type: 'div',
-        attrs: { class: 'search' },
-        container
-    });
+  const searchBox = createElement({
+    type: 'div',
+    attrs: { class: 'search' },
+    container
+  });
 
-    createElement({
-        type: 'label',
-        attrs: {
-            class: 'search__label-input',
-            for: 'search',
-            innerText: 'Поиск фильмов'
-        },
-        container: searchBox
-    });
+  createElement({
+    type: 'label',
+    attrs: {
+      class: 'search__label-input',
+      for: 'search',
+      innerText: 'Поиск фильмов'
+    },
+    container: searchBox
+  });
 
-    createElement({
-        type: 'input',
-        attrs: {
-            class: 'search__input',
-            id: 'search',
-            placeholder: 'Начните вводить текст...',
-            type: 'text'
-        },
-        container: searchBox
-    });
+  createElement({
+    type: 'input',
+    attrs: {
+      class: 'search__input',
+      id: 'search',
+      placeholder: 'Начните вводить текст...',
+      type: 'text'
+    },
+    container: searchBox
+  });
 
-    const searchWrap = createElement({
-        type: 'div',
-        attrs: { class: 'search__wrap' },
-        container: searchBox
-    });
+  const searchWrap = createElement({
+    type: 'div',
+    attrs: { class: 'search__wrap' },
+    container: searchBox
+  });
 
-    createElement({
-        type: 'input',
-        attrs: {
-            class: 'search__checkbox',
-            id: 'checkbox',
-            type: 'checkbox'
-        },
-        container: searchWrap,
-        evt: 'click',
-        handler: () => triggerMode = !triggerMode
-    });
+  createElement({
+    type: 'input',
+    attrs: {
+      class: 'search__checkbox',
+      id: 'checkbox',
+      type: 'checkbox'
+    },
+    container: searchWrap,
+    evt: 'click',
+    handler: () => triggerMode = !triggerMode
+  });
 
-    createElement({
-        type: 'label',
-        attrs: {
-            class: 'search__label-checkbox',
-            for: 'checkbox',
-            innerText: 'Добавлять фильмы к существующему списку'
-        },
-        container: searchWrap
-    });
+  createElement({
+    type: 'label',
+    attrs: {
+      class: 'search__label-checkbox',
+      for: 'checkbox',
+      innerText: 'Добавлять фильмы к существующему списку'
+    },
+    container: searchWrap
+  });
 
-    createElement({
-        type: 'div',
-        attrs: { class: 'movies' },
-        container
-    });
+  createElement({
+    type: 'div',
+    attrs: { class: 'movies' },
+    container
+  });
 
-    movieList = document.querySelector('.movies');
-    inputSearch = document.querySelector('#search');
+  movieList = document.querySelector('.movies');
+  inputSearch = document.querySelector('#search');
 };
 
 export const clearMovieMarkup = (el) => el && (el.innerHTML = '');
 
 export const addMovieList = (movie) => {
-    const item = createElement({
-        type: 'div',
-        attrs: { class: 'movie' },
-        container: movieList
-    });
+  const item = createElement({
+    type: 'div',
+    attrs: { class: 'movie' },
+    container: movieList
+  });
 
-    createElement({
-        type: 'img',
-        attrs: {
-            class: 'movie__image',
-            src: /^(http|https):\/\//i.test(movie.Poster) ? movie.Poster : 'assets/img/no-image-available.jpg',
-            alt: movie.Title,
-            title: movie.Title
-        },
-        container: item
-    });
+  createElement({
+    type: 'img',
+    attrs: {
+      class: 'movie__image',
+      src: /^(http|https):\/\//i.test(movie.Poster) ? movie.Poster : 'assets/img/no-image-available.jpg',
+      alt: movie.Title,
+      title: movie.Title
+    },
+    container: item
+  });
 };
