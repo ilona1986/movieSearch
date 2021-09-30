@@ -3,37 +3,35 @@ export let inputSearch = null;
 export let triggerMode = false;
 
 export const createElement = ({
-    type,
-    attrs,
-    container = null,
-    position = 'append',
-    evt = null,
-    handler = null
+  type,
+  attrs,
+  container = null,
+  position = 'append',
+  evt = null,
+  handler = null
 }) => {
-    const el = document.createElement(type);
+  const el = document.createElement(type);
 
-    Object.keys(attrs).forEach((key) => {
-        if (key !== 'innerText') {
-            el.setAttribute(key, attrs[key]);
-        } else {
-            el.innerHTML = attrs[key];
-        }
-    });
+  Object.keys(attrs).forEach((key) => {
+    if (key !== 'innerText') {
+      el.setAttribute(key, attrs[key]);
+    } else {
+      el.innerHTML = attrs[key];
+    }
+  });
 
-    if (container && position === 'append') container.append(el);
-    if (container && position === 'prepend') container.prepend(el);
-    if (evt && handler && typeof handler === 'function') el.addEventListener(evt, handler);
+  if (container && position === 'append') container.append(el);
+  if (container && position === 'prepend') container.prepend(el);
+  if (evt && handler && typeof handler === 'function') el.addEventListener(evt, handler);
 
-    return el;
+  return el;
 };
 
 export const createStyle = () => {
-    const headStyle = document.createElement('style')
+  const headStyle = document.createElement('style')
 
-    headStyle.innerHTML = `
-    * {
-    box-sizing: border-box;
-  }
+  headStyle.innerHTML = `
+    * {box-sizing: border-box;}
   body {
     margin: 0;
     /* font-family: Arial, "Helvetica Neue", sans-serif; */
@@ -98,111 +96,111 @@ export const createStyle = () => {
     object-fit: cover;
   }`;
 
-    document.head.append(headStyle);
+  document.head.append(headStyle);
 };
 
 export const createMarkup = () => {
-    const content = createElement({
-        type: 'div',
-        attrs: { class: 'content' },
-        container: document.body,
-        position: 'prepend'
-    });
+  const content = createElement({
+    type: 'div',
+    attrs: { class: 'content' },
+    container: document.body,
+    position: 'prepend'
+  });
 
-    const container = createElement({
-        type: 'div',
-        attrs: { class: 'container' },
-        container: content,
-    });
+  const container = createElement({
+    type: 'div',
+    attrs: { class: 'container' },
+    container: content,
+  });
 
-    createElement({
-        type: 'h1',
-        attrs: { innerText: 'Приложение для поиска фильмов' },
-        container
-    });
+  createElement({
+    type: 'h1',
+    attrs: { innerText: 'Приложение для поиска фильмов' },
+    container
+  });
 
-    const searchBox = createElement({
-        type: 'div',
-        attrs: { class: 'search' },
-        container
-    });
+  const searchBox = createElement({
+    type: 'div',
+    attrs: { class: 'search' },
+    container
+  });
 
-    createElement({
-        type: 'label',
-        attrs: {
-            class: 'search__label-input',
-            for: 'search',
-            innerText: 'Поиск фильмов'
-        },
-        container: searchBox
-    });
+  createElement({
+    type: 'label',
+    attrs: {
+      class: 'search__label-input',
+      for: 'search',
+      innerText: 'Поиск фильмов'
+    },
+    container: searchBox
+  });
 
-    createElement({
-        type: 'input',
-        attrs: {
-            class: 'search__input',
-            id: 'search',
-            placeholder: 'Начните вводить текст...',
-            type: 'text'
-        },
-        container: searchBox
-    });
+  createElement({
+    type: 'input',
+    attrs: {
+      class: 'search__input',
+      id: 'search',
+      placeholder: 'Начните вводить текст...',
+      type: 'text'
+    },
+    container: searchBox
+  });
 
-    const searchWrap = createElement({
-        type: 'div',
-        attrs: { class: 'search__wrap' },
-        container: searchBox
-    });
+  const searchWrap = createElement({
+    type: 'div',
+    attrs: { class: 'search__wrap' },
+    container: searchBox
+  });
 
-    createElement({
-        type: 'input',
-        attrs: {
-            class: 'search__checkbox',
-            id: 'checkbox',
-            type: 'checkbox'
-        },
-        container: searchWrap,
-        evt: 'click',
-        handler: () => triggerMode = !triggerMode
-    });
+  createElement({
+    type: 'input',
+    attrs: {
+      class: 'search__checkbox',
+      id: 'checkbox',
+      type: 'checkbox'
+    },
+    container: searchWrap,
+    evt: 'click',
+    handler: () => triggerMode = !triggerMode
+  });
 
-    createElement({
-        type: 'label',
-        attrs: {
-            class: 'search__label-checkbox',
-            for: 'checkbox',
-            innerText: 'Добавлять фильмы к существующему списку'
-        },
-        container: searchWrap
-    });
+  createElement({
+    type: 'label',
+    attrs: {
+      class: 'search__label-checkbox',
+      for: 'checkbox',
+      innerText: 'Добавлять фильмы к существующему списку'
+    },
+    container: searchWrap
+  });
 
-    createElement({
-        type: 'div',
-        attrs: { class: 'movies' },
-        container
-    });
+  createElement({
+    type: 'div',
+    attrs: { class: 'movies' },
+    container
+  });
 
-    movieList = document.querySelector('.movies');
-    inputSearch = document.querySelector('#search');
+  movieList = document.querySelector('.movies');
+  inputSearch = document.querySelector('#search');
 };
 
 export const clearMovieMarkup = (el) => el && (el.innerHTML = '');
 
 export const addMovieList = (movie) => {
-    const item = createElement({
-        type: 'div',
-        attrs: { class: 'movie' },
-        container: movieList
-    });
+  const item = createElement({
+    type: 'div',
+    attrs: { class: 'movie' },
+    container: movieList
+  });
 
-    createElement({
-        type: 'img',
-        attrs: {
-            class: 'movie__image',
-            src: /^(http|https):\/\//i.test(movie.Poster) ? movie.Poster : 'assets/img/no-image-available.jpg',
-            alt: movie.Title,
-            title: movie.Title
-        },
-        container: item
-    });
+  createElement({
+    type: 'img',
+    attrs: {
+      class: 'movie__image',
+      src: /^(http|https):\/\//i.test(movie.Poster) ? movie.Poster : 'assets/img/no-image-available.jpg',
+      alt: movie.Title,
+      title: movie.Title
+    },
+    container: item
+  });
 };
