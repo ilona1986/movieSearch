@@ -2,7 +2,7 @@ import {
     addMovieList,
     clearMovieMarkup,
     createMarkup,
-    // createStyle,
+    createStyle,
     inputSearch,
     movieList,
     triggerMode
@@ -41,18 +41,15 @@ const inputSearchHandler = (e) => {
                 .then((movies) => movies.forEach(movie => addMovieList(movie)))
                 .catch((err) => console.log(err));
         }
-     count++; 
+       count++; 
         
-      console.log(count); 
         searchLast = searchString;
     }, 2000);
 };
-// count++;
-console.log(count);
-// count = 0;
+
 export const appInit = (url) => {
     createMarkup();
-    // createStyle();
+    createStyle();
     siteUrl = url;
 
     inputSearch.addEventListener('keyup', inputSearchHandler);
