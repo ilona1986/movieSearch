@@ -35,7 +35,7 @@ export const createStyle = () => {
   body {margin: 0;}
   .content {
     background-color: hsl(249, 9%, 44%);
-    background-image: url(../assets/img/fon.jpg);
+    background-image: url('assets/img/fon.jpg');
     background-position: 85% 20%; 
     background-size: cover;
     background-repeat: no-repeat;
