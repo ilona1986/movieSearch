@@ -3,6 +3,7 @@ import {
     clearMovieMarkup,
     createMarkup,
     createStyle,
+    createStyleAnother,
     inputSearch,
     movieList,
     triggerMode
@@ -33,10 +34,17 @@ const inputSearchHandler = (e) => {
         const searchString = e.target.value.trim();
 
         if (searchString && searchString.length > 3 && searchLast !== searchString) {
+            if (triggerMode) {
+                createStyle();
+            } else {
+                createStyleAnother(); 
+            }   
+
             if (!triggerMode || count >= 3) {
                 clearMovieMarkup(movieList);
                 count = 0;
-            }
+            }  
+                       
             getData(`${siteUrl}?apikey=4ad12d14&s=${searchString}`)
                 .then((movies) => movies.forEach(movie => addMovieList(movie)))
                 .catch((err) => console.log(err));
@@ -49,7 +57,12 @@ const inputSearchHandler = (e) => {
 
 export const appInit = (url) => {
     createMarkup();
+    if (triggerMode) {
     createStyle();
+    } else {
+     createStyleAnother();
+    }
+    
     siteUrl = url;
 
     inputSearch.addEventListener('keyup', inputSearchHandler);
