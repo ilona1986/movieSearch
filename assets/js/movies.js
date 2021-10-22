@@ -4,6 +4,7 @@ import {
     createMarkup,
     createStyle,
     createStyleAnother,
+    createStyleSecond,
     inputSearch,
     movieList,
     triggerMode
@@ -25,7 +26,11 @@ const debounce = (() => {
 const getData = (url) => fetch(url)
     .then((res) => res.json())
     .then((json) => {
-        if (!json || !json.Search) throw Error('Сервер вернул неправильный объект.');
+        if (!json || !json.Search) {
+            throw Error('Сервер вернул неправильный объект.');
+        } else {
+            count ++;
+        }
         return json.Search;
     });
 
@@ -34,10 +39,12 @@ const inputSearchHandler = (e) => {
         const searchString = e.target.value.trim();
 
         if (searchString && searchString.length > 3 && searchLast !== searchString) {
-            if (triggerMode) {
-                createStyle();
+            if (triggerMode && count ===  1) {
+                createStyleSecond();
+            } else if (count === 2) {
+                createStyle(); 
             } else {
-                createStyleAnother(); 
+                createStyleAnother();
             }   
 
             if (!triggerMode || count >= 3) {
@@ -49,20 +56,15 @@ const inputSearchHandler = (e) => {
                 .then((movies) => movies.forEach(movie => addMovieList(movie)))
                 .catch((err) => console.log(err));
         }
-        count++;
-
+       
         searchLast = searchString;
     }, 2000);
 };
 
 export const appInit = (url) => {
     createMarkup();
-    if (triggerMode) {
-    createStyle();
-    } else {
-     createStyleAnother();
-    }
-    
+    createStyleAnother();
+        
     siteUrl = url;
 
     inputSearch.addEventListener('keyup', inputSearchHandler);
